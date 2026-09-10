@@ -35,6 +35,15 @@ enum SystemDemoScreen: String, CaseIterable, Hashable {
         }
     }
 
+    /// 탭 바를 숨기고 자체 하단 바를 보여주는 화면인지 여부.
+    /// 루트 TabView가 하단 액세서리 표시 여부를 결정할 때 사용한다.
+    var hidesTabBar: Bool {
+        switch self {
+        case .toolbar, .safeAreaBar: true
+        default: false
+        }
+    }
+
     @ViewBuilder
     var destination: some View {
         switch self {
@@ -50,12 +59,8 @@ enum SystemDemoScreen: String, CaseIterable, Hashable {
 }
 
 struct SystemView: View {
-    // 스크린샷 자동화용: START_DEMO 환경 변수로 하위 화면 딥링크.
-    @State private var path: [SystemDemoScreen] = {
-        guard let raw = ProcessInfo.processInfo.environment["START_DEMO"],
-              let screen = SystemDemoScreen(rawValue: raw) else { return [] }
-        return [screen]
-    }()
+    // 루트 TabView가 현재 화면에 따라 하단 액세서리를 제어할 수 있도록 path를 외부에서 소유한다.
+    @Binding var path: [SystemDemoScreen]
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -111,5 +116,6 @@ struct SystemView: View {
 }
 
 #Preview {
-    SystemView()
+    @Previewable @State var path: [SystemDemoScreen] = []
+    SystemView(path: $path)
 }

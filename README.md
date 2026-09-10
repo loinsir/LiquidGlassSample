@@ -3,7 +3,7 @@
 디자이너를 위한 iOS 26 **Liquid Glass** 컴포넌트 레퍼런스 앱입니다.
 애플 공식 문서를 기반으로 각 API의 실제 렌더링과 인터랙션을 직접 확인할 수 있습니다.
 
-> 요구 사항: Xcode 26 + iOS 26 시뮬레이터/기기
+> 요구 사항: Xcode 26 + iOS 26.1 이상 시뮬레이터/기기 (`tabViewBottomAccessory(isEnabled:)` 사용)
 
 ## 화면 구성
 

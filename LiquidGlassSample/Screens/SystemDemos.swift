@@ -135,6 +135,7 @@ struct ToolbarDemoView: View {
                     Spacer()
                     Text("항목 24개")
                         .font(.footnote)
+                        .fixedSize()
                     Spacer()
                     Button("필터", systemImage: "line.3.horizontal.decrease.circle") {}
                 }
@@ -356,7 +357,7 @@ struct PresentationDemoView: View {
                     VStack(spacing: 12) {
                         Text("팝오버도 Liquid Glass")
                             .font(.headline)
-                        Text("컴팩트 환경에서는 시트로 표시됩니다.")
+                        Text("presentationCompactAdaptation(.popover)로 iPhone에서도 시트 대신 팝오버로 표시됩니다.")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
@@ -478,6 +479,8 @@ struct SidebarAdaptableDemo: View {
             }
         }
         .tabViewStyle(.sidebarAdaptable)
+        // 루트 TabView의 미니 플레이어 액세서리가 환경을 통해 상속되므로 이 데모에서는 끈다.
+        .tabViewBottomAccessory(isEnabled: false) { EmptyView() }
     }
 
     private func sampleContent(title: String, seed: Int) -> some View {
@@ -504,6 +507,7 @@ struct SidebarAdaptableDemo: View {
 // MARK: - iPad 레이아웃 (스플릿 뷰 + 배경 확장 효과)
 
 struct IPadLayoutDemoView: View {
+    @Environment(\.dismiss) private var dismiss
     @State private var selectedItem: String? = "배경 확장 효과"
     private let items = ["배경 확장 효과", "사이드바", "인스펙터"]
     @State private var showInspector = false
@@ -514,6 +518,12 @@ struct IPadLayoutDemoView: View {
                 Label(item, systemImage: "square.split.2x1")
             }
             .navigationTitle("스플릿 뷰")
+            // 바깥 NavigationStack의 바를 숨기므로 허브로 돌아갈 뒤로 버튼을 직접 제공한다.
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("뒤로", systemImage: "chevron.left") { dismiss() }
+                }
+            }
         } detail: {
             ZStack {
                 // 배경 확장 효과: 배경이 사이드바/인스펙터 아래로
