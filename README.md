@@ -13,7 +13,7 @@
 | 버튼 | 글래스 버튼 스타일, 사이즈, 셰이프, 메뉴 모핑 | `.buttonStyle(.glass)`, `.buttonStyle(.glassProminent)`, `.controlSize`, `.buttonBorderShape` |
 | 모핑 | 셰이프 블렌딩(spacing 조절), 유니온, 확장/축소 모핑, materialize 전환 | `GlassEffectContainer(spacing:)`, `.glassEffectUnion(id:namespace:)`, `.glassEffectID(_:in:)`, `.glassEffectTransition(.matchedGeometry/.materialize)` |
 | 시스템 | 컴포넌트별 테스트 허브 (아래 표) | — |
-| 검색 | 검색 탭 + 검색 필드, 스크롤 시 최소화 | `Tab(role: .search)`, `.searchable`, `.searchToolbarBehavior(.minimize)` |
+| 검색 | 검색 탭 + 검색 필드, 스크롤 시 최소화, 검색 토큰(추천 토큰·입력 중 토큰 추천·편집 토큰·토큰 뷰 커스텀 한계) | `Tab(role: .search)`, `.searchable`, `.searchToolbarBehavior(.minimize)`, `.searchable(text:tokens:suggestedTokens:prompt:token:)`, `.searchable(text:editableTokens:prompt:token:)`, `.searchSuggestions`, `.searchCompletion(_:)` |
 
 ### 시스템 탭 하위 화면
 
